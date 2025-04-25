@@ -43,16 +43,16 @@ function App() {
 
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-800 to-gray-900 px-4">
-      <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8 space-y-6">
+    <div className="flex items-center justify-center min-h-screen w-full bg-gradient-to-br from-gray-800 to-gray-900 px-4 ">
+      <div className="max-w-xl bg-white rounded-2xl shadow-xl p-8 space-y-6 md:max-w-[60%] lg:max-w-[50%] w-full">
         <h1 className="text-3xl font-bold text-center text-gray-800">
           🔐 Password Generator
         </h1>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 w-full">
           <input
             type="text"
-            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-[80%] border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={password}
             readOnly
             ref={passwordRef}
