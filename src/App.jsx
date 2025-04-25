@@ -28,11 +28,11 @@ function App() {
 
   let passwordRef = useRef(null);
 
-  const copyPasswordInClipboard = useCallback( ()=>{
+  const copyPasswordInClipboard = useCallback(() => {
     passwordRef.current?.select();
-    passwordRef.current?.setSelectionRange(0,999);
+    passwordRef.current?.setSelectionRange(0, 999);
     window.navigator.clipboard.writeText(password);
-  },[password]
+  }, [password]
 
   )
 
@@ -43,59 +43,71 @@ function App() {
 
 
   return (
-    <>
-      <div className='bg-gray-500 py-5 md:max-w-[60%] lg:max-w-[50%] w-[85%] rounded-lg flex justify-center flex-col mt-48 mx-auto'>
-        <h1 className='text-center text-3xl'>Password Generator</h1>
-        <div className='py-4 px-9 space-y-5'>
-          <div className='flex w-full'>
-            <input type="text"
-              className='w-full outline-none py-1 px-3'
-              placeholder='Password'
-              value={password}
-              readOnly
-              ref={passwordRef}
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-800 to-gray-900 px-4">
+      <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8 space-y-6">
+        <h1 className="text-3xl font-bold text-center text-gray-800">
+          🔐 Password Generator
+        </h1>
 
-            />
-            <button className='bg-orange-500 px-3 py-1 transition-opacity active:scale-90 hover:opacity-90'
+        <div className="flex items-center gap-4">
+          <input
+            type="text"
+            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={password}
+            readOnly
+            ref={passwordRef}
+          />
+          <button
             onClick={copyPasswordInClipboard}
-            >copy</button>
-
-          </div>
-          <div className='flex gap-2 text-[1.1rem] font-semibold sm:items-center justify-between w-full flex-col sm:flex-row'>
-            <div className='flex gap-2 items-center '>
-              <input type="range" min={5} max={50}
-                value={length}
-                className='cursor-pointer'
-                onChange={(e) => { setLength(e.target.value) }}
-              />
-              <label >Length : {length}</label>
-            </div>
-
-            <div className='flex gap-2'>
-              <input type="checkbox" id="num"
-                defaultChecked={numberAllowed}
-                onChange={() => {
-                  setNumberAllowed((prev) => !prev)}
-                }
-              />
-              <label htmlFor="num">Numbers</label>
-            </div>
-
-            <div className='flex gap-2'>
-              <input type="checkbox" id="char"
-              defaultChecked = {charAllowed}
-                onChange={() => {
-                  setCharAllowed((prev) => !prev)}
-                }
-              />
-              <label htmlFor="char">Characters</label>
-            </div>
-          </div>
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 active:scale-95 transition"
+          >
+            Copy
+          </button>
         </div>
 
+        <div className="space-y-4">
+          {/* Length Slider */}
+          <div className="flex items-center justify-between">
+            <label className="font-medium text-gray-700">
+              Password Length: <span className="font-bold">{length}</span>
+            </label>
+            <input
+              type="range"
+              min={5}
+              max={50}
+              value={length}
+              className="w-2/3 accent-blue-600"
+              onChange={(e) => setLength(e.target.value)}
+            />
+          </div>
+
+          {/* Options */}
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+            <label className="flex items-center gap-2 text-gray-700">
+              <input
+                type="checkbox"
+                checked={numberAllowed}
+                onChange={() => setNumberAllowed((prev) => !prev)}
+                className="accent-blue-600 w-5 h-5"
+              />
+              Include Numbers
+            </label>
+
+            <label className="flex items-center gap-2 text-gray-700">
+              <input
+                type="checkbox"
+                checked={charAllowed}
+                onChange={() => setCharAllowed((prev) => !prev)}
+                className="accent-blue-600 w-5 h-5"
+              />
+              Include Special Characters
+            </label>
+          </div>
+        </div>
       </div>
-    </>
-  )
+    </div>
+  );
+
 }
 
 export default App
